@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\UserUpdatePasswordRequest;
+use App\Http\Requests\User\UserRegisterInfoRequest;
 
 class AuthController extends Controller
 {
@@ -15,18 +18,8 @@ class AuthController extends Controller
         $this->user = $user;
     }
 
-    public function register(Request $request)
+    public function register(UserRegisterInfoRequest $request)
     {
-        // validate the incoming request
-        // set every field as required
-        // set email field so it only accept the valid email format
-
-        $this->validate($request, [
-            'name' => 'required|string|min:2|max:255',
-            'email' => 'required|string|email:rfc,dns|max:255|unique:users',
-            'password' => 'required|string|min:6|max:255',
-        ]);
-
         // if the request valid, create user
 
         $user = $this->user::create([
@@ -110,5 +103,25 @@ class AuthController extends Controller
                 'data' => [],
             ]);
         }
+    }
+
+    public function changePassword(UserUpdatePasswordRequest $request)
+    {
+        // Lấy người dùng hiện tại
+        $user = auth()->user();
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(
+                ['message' => 'Current password is incorrect'], 
+                401
+            );
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        $this->logout();
+        return response()->json(['message' => 'Password successfully changed']);
     }
 }
