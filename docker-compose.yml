@@ -1,8 +1,8 @@
 services:
 
-  server_time_management_db:
+  server_db:
     image: mysql:8.0
-    container_name: server_time_management_db
+    container_name: server_db
     ports:
       - 3900:3306
     restart: always
@@ -12,11 +12,11 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
 
-  server_time_management_app:
+  server_app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: server_time_management_app
+    container_name: server_app
     restart: always
     ports:
       - 8900:80
@@ -28,7 +28,7 @@ services:
         - SYS_ADMIN
     environment:
       - DB_CONNECTION=mysql
-      - DB_HOST=server_time_management_db
+      - DB_HOST=server_db
       - DB_PORT=3306
       - DB_DATABASE=time_management_db
       - DB_USERNAME=user
