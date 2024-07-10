@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('team_id')->nullable()->after('id');
-            $table->boolean('is_lead')->default(0)->comment('0 : member, 1 : lead');
+            $table->unsignedBigInteger('team_id')->nullable()->after('remember_token');
+            $table->boolean('is_lead')->default(0)->comment('0 : member, 1 : lead')->after('team_id');
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
         });
     }
@@ -28,9 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['team_id']);
+            $table->dropForeign('users_team_id_foreign');
             $table->dropColumn('team_id');
-            $table->dropColumn('lead');
+            $table->dropColumn('is_lead');
         });
     }
 };
