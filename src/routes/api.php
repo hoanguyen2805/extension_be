@@ -32,8 +32,10 @@ Route::middleware('auth:api')->group(function () {
 
     Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
         Route::get('list', [TeamController::class, 'getList']);
+        Route::get('my-team', [TeamController::class, 'getMyTeam']);
         Route::post('create', [TeamController::class, 'create']);
-        //Route::post('delete', [TeamController::class, 'delete']);
+        Route::post('update', [TeamController::class, 'update']);
+        Route::post('delete', [TeamController::class, 'delete']);
         Route::post('leave', [TeamController::class, 'leaveTeam']);
         Route::post('join', [TeamController::class, 'joinTeam']);
     });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Team;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\UserUpdatePasswordRequest;
@@ -73,6 +74,7 @@ class AuthController extends Controller
                 ],
                 'data' => [
                     'user' => auth()->user(),
+                    'team' => Team::find(auth()->user()->team_id),
                     'access_token' => [
                         'token' => $token,
                         'type' => 'Bearer',
@@ -82,7 +84,7 @@ class AuthController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'Sai thông tin ID hoặc PassWord'], 401);
+        return response()->json(['message' => 'Wrong Email information or password'], 401);
     }
 
     public function logout()

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('team_id')->nullable()->after('remember_token');
             $table->boolean('is_lead')->default(0)->comment('0 : member, 1 : lead')->after('team_id');
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('SET NULL');
         });
     }
 
