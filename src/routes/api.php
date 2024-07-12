@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\GoogleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,5 +42,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('sync-data', [TeamController::class, 'syncData']);
         Route::get('members', [TeamController::class, 'getMembers']);
     });
-
 });
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
