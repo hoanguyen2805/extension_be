@@ -38,6 +38,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('delete', [TeamController::class, 'delete']);
         Route::post('leave', [TeamController::class, 'leaveTeam']);
         Route::post('join', [TeamController::class, 'joinTeam']);
+        Route::post('sync-data', [TeamController::class, 'syncData']);
     });
 
 });

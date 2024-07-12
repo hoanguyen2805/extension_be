@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Team\TeamCreateRequest;
 use App\Http\Requests\Team\TeamDeleteRequest;
 use App\Http\Requests\Team\TeamJoinRequest;
+use App\Http\Requests\Team\TeamSyncDataRequest;
 use App\Http\Requests\Team\TeamUpdateRequest;
 use App\Models\Team;
 use App\Models\User;
@@ -145,11 +146,28 @@ class TeamController extends Controller
                         'message' => 'Get Team successfully!',
                     ],
                     'data' => [
-                        'team' => $team
+                        'team' => $team,
+                        'user' => $user
                     ],
                 ]);
             }
         }
         return response()->json(['message' => 'An error has occurred!'], 403);
+    }
+
+    public function syncData(TeamSyncDataRequest $request)
+    {
+        $user = auth()->user();
+        if ($user->team_id && $user->is_lead) {
+            $team = Team::find($user->team_id);
+            $team->data = $request->data;
+            $team->save();
+
+            return response()->json([
+                'data' =>
+                ['message' => 'Team Data information updated successfully']
+            ]);
+        }
+        return response()->json(['message' => 'You do not have access!'], 403);
     }
 }
