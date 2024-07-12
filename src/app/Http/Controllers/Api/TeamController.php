@@ -170,4 +170,22 @@ class TeamController extends Controller
         }
         return response()->json(['message' => 'You do not have access!'], 403);
     }
+
+    public function getMembers()
+    {
+        $user = auth()->user();
+
+        $list = User::where('team_id', $user->team_id)->get();
+        
+        return response()->json([
+            'meta' => [
+                'code' => 200,
+                'status' => 'success',
+                'message' => 'Get All Members successfully!',
+            ],
+            'data' => [
+                'members' => $list
+            ],
+        ]);
+    }
 }
