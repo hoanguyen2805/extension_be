@@ -70,4 +70,12 @@ class User extends Authenticatable implements JWTSubject // implement the JWTSub
     {
         return $this->belongsTo(Team::class, 'team_id', 'id');
     }
+
+    public function getAvatarAttribute($value)
+    {
+        if ($value) {
+            return asset('storage/' . $value);
+        }
+        return $value;
+    }
 }

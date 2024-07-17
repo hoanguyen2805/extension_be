@@ -188,4 +188,25 @@ class TeamController extends Controller
             ],
         ]);
     }
+
+    public function getDetailTeam($id)
+    {
+        $team = Team::with('users')->find($id);
+        $user = auth()->user();
+        if ($team) {
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'status' => 'success',
+                    'message' => 'Get Team successfully!',
+                ],
+                'data' => [
+                    'team' => $team,
+                    'users' => $team->users,
+                    'my_id' => $user->id
+                ],
+            ]);
+        }
+        return response()->json(['message' => 'An error has occurred!'], 403);
+    }
 }
