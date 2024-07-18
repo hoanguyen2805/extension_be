@@ -26,6 +26,7 @@ class UserUpdateInfoRequest extends ApiRequest
     {
         return [
             'name' => ['required', 'min:3'],
+            'file' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:1012']
         ];
     }
 }
