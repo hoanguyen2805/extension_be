@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad089ab0150eee9c46ab37b710f4adea",
+    "content-hash": "a40f1d643850fad8fc5645a02b243a7b",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3319,6 +3319,62 @@
                 }
             ],
             "time": "2024-06-24T06:27:33+00:00"
+        },
+        {
+            "name": "pragmarx/google2fa",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antonioribeiro/google2fa.git",
+                "reference": "ff92a3f979b7807a2219f895db92b5c28f2a5498"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/ff92a3f979b7807a2219f895db92b5c28f2a5498",
+                "reference": "ff92a3f979b7807a2219f895db92b5c28f2a5498",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.7"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.1@dev"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "frameworks": [
+                    "Laravel"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "PragmaRX\\Google2FA\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Carlos Ribeiro",
+                    "email": "acr@antoniocarlosribeiro.com",
+                    "role": "Creator & Designer"
+                }
+            ],
+            "description": "A One Time Password Authentication package, compatible with Google Authenticator.",
+            "keywords": [
+                "Authentication",
+                "Two Factor Authentication",
+                "google2fa",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/antonioribeiro/google2fa/issues",
+                "source": "https://github.com/antonioribeiro/google2fa/tree/v0.5.0"
+            },
+            "time": "2015-02-20T01:25:04+00:00"
         },
         {
             "name": "psr/clock",

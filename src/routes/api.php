@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\GoogleController;
+use App\Http\Controllers\Api\ForgotPasswordOTPController;
+use App\Http\Controllers\Api\ResetPasswordOTPController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,6 +47,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('members', [TeamController::class, 'getMembers']);
     });
 });
+
+Route::post('password/otp', [ForgotPasswordOTPController::class, 'sendOTP']);
+Route::post('password/reset-otp', [ResetPasswordOTPController::class, 'resetPassword']);
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
